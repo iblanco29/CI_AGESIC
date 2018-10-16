@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="functions.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<!--
+    <script>
+        function goPython(){
+            $.ajax({
+              url: "face_verification.py",
+             context: document.body
+            }).done(function() {
+             alert('finished python script');;
+            });
+        }
+    </script>
+-->
+
+    <title>AuntentID</title>
+</head>
+<body>
+    <div id="home_container">
+        <div id="logo">
+
+        </div>
+        <div id="text_init">
+            <p class="texto">Bienvenido al sistema de autenticación facial de la Universidad de Montevideo</p>
+        </div>
+        <div id="btn_init">
+            <button id="init" onclick="move_to_info()">
+                Presione para comenzar
+            </button>
+        </div>
+    </div>
+
+    <div id="info_container">
+            <div id="text_info">
+                <p class="texto">Coloque su documento de identidad como indica la figura</p>
+            </div>
+            <div id="pic_info">
+    
+            </div>
+            <div id="btn_info">
+                <button id="prev" onclick="move_to_main()">
+                    Cancelar
+                </button>
+                <button id="next" onclick="move_to_camera(); goPython();">
+                    Siguiente
+                </button>
+            </div>
+    </div>
+    
+
+    <div id="camera_container">
+        <div id="text_camera">
+            <p class="texto">Coloquese en frente a la cámara</p>
+
+        </div>
+<!-- 
+       <div id="camera">
+                
+        </div>
+        <div id="btn_camera">
+            <button id="success" onclick="move_to_success()">
+                success
+            </button>
+            <button id="failures" onclick="move_to_failure()">
+                failure
+            </button>
+        </div>
+-->
+    </div>
+    <script>
+        function goPython(){
+            $.ajax({
+                method: "GET",
+                url: "face_verification.py",
+                dataType: "text",
+                context: document.body
+            }).done(function() {
+                alert('finished python script');;
+            });
+        }
+    </script>
+    <div id="success_container">
+        <div id="logo">
+            
+        </div>
+        <div id="text_success">
+            <p class="texto">¡Bienvenido JUAN PEREZ! Ya puede retirar su documento de identidad</p>
+        </div>
+        <div id="text_success_thanks">
+            <p class="texto">Gracias por utilizar AutentID</p>
+        </div>
+    </div>
+
+    <div id="failure_container">
+        <div id="logo">
+            
+        </div>
+        <div id="text_failure">
+            <p class="texto">Autenticación fallida, intente nuevamente</p>
+        </div>
+        <div id="btn_failure">
+            <button id="reintentar" onclick="move_to_camera_ff()">
+                Reintentar
+            </button>
+        </div>
+    </div>
+</body>
+</html>

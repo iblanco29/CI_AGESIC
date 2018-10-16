@@ -1,0 +1,170 @@
+body{
+    height: 100%;
+    width: 100%;
+
+}
+#home_container{
+    height: 100%;
+    width: 100%;
+    display: block;
+    position: absolute;
+    background: rgb(47, 47, 177);
+}
+#logo{
+    position: absolute;
+    left: 44%;
+    top:20%;
+    height: 25%;
+    width: 12%;
+    background: white;
+    border-radius: 15%;
+}
+#text_init{
+    position: absolute;
+    width: 80%;
+    height: 7%;
+    left: 10%;
+    top: 48%;
+    text-align: center;
+    font-size: 140%;
+    color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif
+}
+#btn_init{
+    position: absolute;
+    width: 16%;
+    height: 7%;
+    left: 42%;
+    top: 62%;
+}
+#init{
+    height: 100%;
+    width: 100%;
+    font-size: 90%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif
+}
+#info_container{
+    height: 100%;
+    width: 100%;
+    display: none;
+    position: absolute;
+    background: rgb(47, 47, 177);
+}
+
+#text_info{
+    position: absolute;
+    width: 84%;
+    height: 7%;
+    left: 10%;
+    top: 2%;
+    text-align: center;
+    font-size: 140%;
+    color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif
+}
+
+#pic_info{
+    position: absolute;
+    left: 40%;
+    top:20%;
+    height: 35%;
+    width: 20%;
+    background: white;
+    border-radius: 15%;
+}
+#btn_info{
+    position: absolute;
+    top: 60%;
+    width: 20%;
+    left: 40%;
+    height: 6%;
+}
+#btn_info > button{
+    height: 100%;
+    width: 30%;
+}
+#next{
+    float: right
+}
+#camera_container{
+    position: absolute;
+    background: rgb(47, 47, 177);
+    height: 100%;
+    width: 100%;
+    display: none;
+}
+#camera{
+    position: absolute;
+    top: 33%;
+    left: 35%;
+}
+#text_camera{
+    position: absolute;
+    width: 84%;
+    height: 7%;
+    left: 10%;
+    top: 2%;
+    text-align: center;
+    font-size: 140%;
+    color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif
+}
+
+#success_container{
+    height: 100%;
+    width: 100%;
+    display: none;
+    position: absolute;
+    background: rgb(29, 131, 29);
+}
+
+#text_success{
+    position: absolute;
+    width: 84%;
+    height: 7%;
+    left: 10%;
+    top: 50%;
+    text-align: center;
+    font-size: 140%;
+    color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif
+}
+
+#text_success_thanks{
+    position: absolute;
+    width: 84%;
+    height: 7%;
+    left: 10%;
+    top: 80%;
+    text-align: center;
+    font-size: 90%;
+    color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif
+}
+
+#failure_container{
+    height: 100%;
+    width: 100%;
+    display: none;
+    position: absolute;
+    background: rgb(139, 29, 29);
+}
+#text_failure{
+    position: absolute;
+    width: 84%;
+    height: 7%;
+    left: 10%;
+    top: 50%;
+    text-align: center;
+    font-size: 140%;
+    color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif
+}
+
+#btn_failure{
+    position: absolute;
+    width: 16%;
+    height: 7%;
+    left: 47%;
+    top: 62%;
+}
