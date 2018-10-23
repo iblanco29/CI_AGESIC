@@ -2,6 +2,8 @@ var express = require("express");
 var app     = express();
 var path    = require("path");
 var mysql = require("mysql");
+var PythonShell = require("python-shell");
+
 var connection = mysql.createConnection({
 	host: 'localhost',
 	user: 'root',
@@ -32,6 +34,16 @@ app.get('/sitemap',function(req,res){
   res.sendFile(path.join(__dirname+'/sitemap.html'));
 });
 
+
+app.get('/face_verification', function (req, res) {
+  PythonShell.run('./face_verification.py',function (err, data) {
+    if (err) res.send(err);
+    res.send(data.toString())
+  });
+});
+
 app.listen(3000);
 
 console.log("Running at Port 3000");
+
+

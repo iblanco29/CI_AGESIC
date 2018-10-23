@@ -7,7 +7,8 @@
     "express": "^4.16.3",
     "mustache-express": "^1.2.7",
     "mysql": "^2.16.0",
-    "nodemon": "^1.18.4"
+    "nodemon": "^1.18.4",
+    "python-shell": "^1.0.6"
   },
   "devDependencies": {},
   "scripts": {
