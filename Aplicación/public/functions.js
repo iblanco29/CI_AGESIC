@@ -37,3 +37,14 @@ function move_to_camera_ff(){
     var info_container = document.getElementById('info_container');
     info_container.style.display = 'block'
 }
+function callFaceVerification(){
+    var xhttp = new XMLHttpRequest();
+    console.log('hola')
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("next").innerHTML = this.responseText;
+        }
+      };
+    xhttp.open("GET", "http://localhost:3000/face_verification", true);
+    xhttp.send();
+} 
