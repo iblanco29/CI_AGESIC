@@ -2,7 +2,6 @@ var express = require("express");
 var app     = express();
 var path    = require("path");
 var mysql = require("mysql");
-var PythonShell = require("python-shell");
 const ps = require('python-shell')
 
 var con = mysql.createConnection({
