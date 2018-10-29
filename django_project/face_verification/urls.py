@@ -7,4 +7,5 @@ urlpatterns = [
 	path('camera/', views.camera, name='face-verif-camera'),
 	path('success/', views.success, name='face-verif-success'),
 	path('failure/', views.failure, name='face-verif-failure'),
+	path('face_verification/', views.face_verification, name='face-verification'),
 ]

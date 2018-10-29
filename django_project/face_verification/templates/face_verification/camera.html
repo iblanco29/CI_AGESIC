@@ -4,5 +4,11 @@
         <div id="text_camera">
             <p class="texto">Coloquese en frente a la cámara</p>
         </div>
+        <div id="pic_info">
+        </div>
+        <form method="post">
+        	{% csrf_token %}
+        	<button id=run_btn type="submit"> RUN FORREST </button>
+        </form>
     </div>
 {% endblock content %}

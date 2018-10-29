@@ -8,9 +8,11 @@
             <p class="texto">Bienvenido al sistema de autenticación facial de la Universidad de Montevideo</p>
         </div>
         <div id="btn_init">
-            <button id="init" onclick="">
-                Presione para comenzar
-            </button>
+            <form id=form_index>
+                <button id="init" formaction="{% url 'face-verif-info' %}">
+                    Presione para comenzar
+                </button>
+            </form>
         </div>
     </div>
 {% endblock content %}

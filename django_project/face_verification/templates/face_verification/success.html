@@ -5,7 +5,7 @@
             
         </div>
         <div id="text_success">
-            <p class="texto">¡Bienvenido 
+            <p class="texto">
             {% for person in persons %}
                 <p class="texto">¡Bienvenido {{person.name}} {{person.surname1}} ! Ya puede retirar su documento de identidad</p>
             {% endfor %}
@@ -13,6 +13,11 @@
             ! Ya puede retirar su documento de identidad</p>
         </div>
         <div id="text_success_thanks">
+            <form>
+                <button id="home" formaction="{% url 'face-verif-home' %}">
+                    Ir a página principal
+                </button>
+            </form>
             <p class="texto">Gracias por utilizar AutentID</p>
         </div>
     </div>

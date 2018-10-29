@@ -8,9 +8,16 @@
             <p class="texto">Autenticación fallida, intente nuevamente</p>
         </div>
         <div id="btn_failure">
-            <button id="reintentar" onclick="">
-                Reintentar
-            </button>
+            <form>
+                <button id="reintentar" formaction="{% url 'face-verification' %}">
+                    Reintentar
+                </button>
+            </form>
+            <form>
+                <button id="cancelar" formaction="{% url 'face-verif-home' %}">
+                    Cancelar
+                </button>
+            </form>
         </div>
     </div>
 {% endblock content %}
