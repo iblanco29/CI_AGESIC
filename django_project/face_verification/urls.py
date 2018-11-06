@@ -8,4 +8,5 @@ urlpatterns = [
 	path('success/', views.success, name='face-verif-success'),
 	path('failure/', views.failure, name='face-verif-failure'),
 	path('face_verification/', views.face_verification, name='face-verification'),
+	path('getData/', views.getData, name = 'get-data'),
 ]

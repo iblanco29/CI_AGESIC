@@ -8,7 +8,7 @@
         </div>
         <form method="post">
         	{% csrf_token %}
-        	<button id=run_btn type="submit"> Realizar verificación </button>
+        	<button id=run_btn type="submit" formaction="{% url 'face-verification' %}"> Realizar verificación </button>
         </form>
     </div>
 {% endblock content %}
