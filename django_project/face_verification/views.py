@@ -98,7 +98,6 @@ def face_verification(request):
                         context = {'persons': persons}
                         user = User(name = nameCI,surname = surnameCI, idNumber = idNumberCI, result = True)
                         user.save()
-                        print(User.objects.first().name)
                         return render(request, 'face_verification/success.html', context)
                     elif True not in matches:
                         user = User(name = nameCI,surname = surnameCI, idNumber = idNumberCI, result = False)
