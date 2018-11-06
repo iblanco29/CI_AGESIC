@@ -2,14 +2,12 @@ import face_recognition
 import cv2
 from django.shortcuts import render
 from face_verification.models import User
+#from imutils.video import FPS
 
 global nameCI
 global surnameCI
 global idNumberCI
-
-nameCI = 'Juan Pablo'
-surnameCI = 'Fajardo Fontes'
-idNumberCI = '1.234.567-8'
+global data 
 
 def home(request):
     return render(request, 'face_verification/index.html')
@@ -24,9 +22,10 @@ def camera(request):
 
 
 def success(request):
-    #context = {
-    #    'persons': persons
-    #}
+    
+#    context = {
+#       'persons': persons
+#    }
     return render(request, 'face_verification/success.html', context)
 
 
@@ -37,8 +36,9 @@ def failure(request):
 def face_verification(request):
 
     if request.POST:
-        video_capture = cv2.VideoCapture(0)
 
+        video_capture = cv2.VideoCapture(0)
+        
         # Load a second sample picture and learn how to recognize it.
         X_image = face_recognition.load_image_file("./face_verification/KnownFaces/X.jpg")
         X_face_encoding = face_recognition.face_encodings(X_image)[0]
@@ -62,7 +62,8 @@ def face_verification(request):
         while True:
             # Grab a single frame of video
             ret, frame = video_capture.read()
-
+            #https://www.pyimagesearch.com/2017/02/06/faster-video-file-fps-with-cv2-videocapture-and-opencv/
+            
             # Resize frame of video to 1/4 size for faster face recognition processing
             small_frame = cv2.resize(frame, (0, 0), fx=0.25, fy=0.25)
 
@@ -88,15 +89,21 @@ def face_verification(request):
                     if True in matches:
                         first_match_index = matches.index(True)
                         name = known_face_names[first_match_index]
-                        persons = [
-                            {
-                                'name': nameCI,
-                                'surname': surnameCI,
-                                'idNumber': idNumberCI
-                            }
-                        ]
+                        data = [0,0,0]
+                        filepath = "/Users/IgnacioBlanco/Desktop/CI_AGESIC/django_project/face_verification/lista.txt"  
+                        f=open(filepath, "r")
+                        fl =f.readlines()
+                        cnt = 0
+                        for x in fl:    
+                            data[cnt] = x
+                            cnt += 1
+                        print(data[0])
+                        persons = [{
+                            'name': data[1],
+                            'surname': data[0]
+                        }]
                         context = {'persons': persons}
-                        user = User(name = nameCI,surname = surnameCI, idNumber = idNumberCI, result = True)
+                        user = User(name = data[1],surname = data[0], idNumber = data[2], result = True)
                         user.save()
                         return render(request, 'face_verification/success.html', context)
                     elif True not in matches:
