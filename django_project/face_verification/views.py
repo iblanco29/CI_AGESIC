@@ -1,16 +1,15 @@
 import face_recognition
 import cv2
 from django.shortcuts import render
+from face_verification.models import User
 
-persons = [
-    {
-        'name': 'Ignacio',
-        'surname1': 'Blanco',
-        'surname2': 'Voeikoff',
-        'idNumber': '4773067-6'
-    }
-]
+global nameCI
+global surnameCI
+global idNumberCI
 
+nameCI = 'Juan Pablo'
+surnameCI = 'Fajardo Fontes'
+idNumberCI = '1.234.567-8'
 
 def home(request):
     return render(request, 'face_verification/index.html')
@@ -25,9 +24,9 @@ def camera(request):
 
 
 def success(request):
-    context = {
-        'persons': persons
-    }
+    #context = {
+    #    'persons': persons
+    #}
     return render(request, 'face_verification/success.html', context)
 
 
@@ -89,9 +88,21 @@ def face_verification(request):
                     if True in matches:
                         first_match_index = matches.index(True)
                         name = known_face_names[first_match_index]
+                        persons = [
+                            {
+                                'name': nameCI,
+                                'surname': surnameCI,
+                                'idNumber': idNumberCI
+                            }
+                        ]
                         context = {'persons': persons}
+                        user = User(name = nameCI,surname = surnameCI, idNumber = idNumberCI, result = True)
+                        user.save()
+                        print(User.objects.first().name)
                         return render(request, 'face_verification/success.html', context)
                     elif True not in matches:
+                        user = User(name = nameCI,surname = surnameCI, idNumber = idNumberCI, result = False)
+                        user.save()
                         return render(request, 'face_verification/failure.html')
 
 
