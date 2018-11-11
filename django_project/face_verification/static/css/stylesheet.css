@@ -9,14 +9,16 @@ body{
     height: 100%;
     width: 100%;
     position: absolute;
-    background: rgb(47, 47, 177);
+    background: steelblue
 }
-#logo{
+
+
+#face_img{
     position: absolute;
-    left: 44%;
-    top:20%;
-    height: 25%;
-    width: 12%;
+    left: 42%;
+    top:12%;
+    height: 33%;
+    width: 18%;
     background: white;
     border-radius: 15%;
 }
@@ -69,7 +71,7 @@ body{
     height: 100%;
     width: 100%;
     position: absolute;
-    background: rgb(47, 47, 177);
+    background: steelblue
 }
 
 #text_info{
@@ -83,7 +85,22 @@ body{
     color: white;
     font-family: Verdana, Geneva, Tahoma, sans-serif
 }
-
+#pic_info_index{
+    position: absolute;
+    left: 40%;
+    top:10%;
+    height: 35%;
+    width: 20%;
+    background: white;
+    border-radius: 15%;
+}
+#logo_img{
+    position: absolute;
+    background: white;
+    border-radius: 15%;
+    height: 100%;
+    width: 100%
+}
 #pic_info{
     position: absolute;
     left: 40%;
@@ -96,6 +113,7 @@ body{
 #pic_info > img{
     width: 100%;
     height: 100%;
+    border-radius: 15%;
 }
 #btn_info{
     position: absolute;
@@ -115,7 +133,7 @@ body{
 }
 #camera_container{
     position: absolute;
-    background: rgb(47, 47, 177);
+    background: steelblue;
     height: 100%;
     width: 100%;
 }

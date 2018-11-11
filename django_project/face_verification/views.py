@@ -1,7 +1,7 @@
 import face_recognition
 import cv2
 from django.shortcuts import render
-from face_verification.models import User
+from face_verification.models import *
 from smartcard.scard import *
 import smartcard.util
 import base64
@@ -68,7 +68,6 @@ def camera(request):
 
             reader = readers[0]
             print ("Using reader:", reader)
-
             try:
                 hresult, hcard, dwActiveProtocol = SCardConnect(hcontext, reader,
                     SCARD_SHARE_SHARED, SCARD_PROTOCOL_T0)
@@ -78,12 +77,13 @@ def camera(request):
                 print ('Connected with active protocol', dwActiveProtocol)
 
                 try:
-                    hresultIas, responseIas = SCardTransmit(hcard, dwActiveProtocol, SELECTIAS)                
+                    hresultIas, responseIas = SCardTransmit(hcard, dwActiveProtocol, SELECTIAS)              
                     hresultData, responseData = SCardTransmit(hcard, dwActiveProtocol, SELECTDATA)
                     hresultGetResponse_Data, responseGetResponse_Data = SCardTransmit(hcard, dwActiveProtocol, GETRESPONSE_DATA)
                     READBINARY_DATA.append(responseGetResponse_Data[5])
+                 
                     hresultReadB_Data, responseReadB_Data = SCardTransmit(hcard, dwActiveProtocol, READBINARY_DATA)
-                    
+               
                     #image
                     hresultImage, responseImage = SCardTransmit(hcard, dwActiveProtocol, SELECTIMAGE)
                     hresultGetResponse_Image, responseGetResponse_Image = SCardTransmit(hcard, dwActiveProtocol, GETRESPONSE_IMAGE)
@@ -111,7 +111,7 @@ def camera(request):
                     responseReadB_Data.pop(0)
                     responseReadB_Data.pop(0)
                     BIO_INFO = smartcard.util.toASCIIString(responseReadB_Data)
-                    
+                   
                                                  
                     printable = set(string.printable)
                     #BIO_INFO = filter(lambda x: x in printable, BIO_INFO)
@@ -125,7 +125,7 @@ def camera(request):
                     BIO_STR = str.split(BIO_STR, '   ')
                     OUTPUT_STR = BIO_STR[0]+'\n'+BIO_STR[1]+'\n'+BIO_STR[5]
                     #print OUTPUT_STR
-                    
+                  
                     file = open(DATAPATH, "w")
                     file.write(OUTPUT_STR)
                     file.close()
@@ -171,7 +171,7 @@ def camera(request):
                     
                     READBINARY_IMAGE = [0x00, 0xB0, P1, P2, r]
                     hresultRead_Image, responseReadB_Image = SCardTransmit(hcard, dwActiveProtocol, READBINARY_IMAGE)
-
+  
                     if hresultRead_Image != SCARD_S_SUCCESS:
                         raise Exception('Failed to transmit: ' +
                             SCardGetErrorMessage(hresultRead_Image))
@@ -206,6 +206,9 @@ def camera(request):
                     file = open(IMAGEPATH, 'wb')
                     file.write(bdata)
                     file.close()
+                    file = open('./face_verification/static/images/X.jpeg', 'wb')
+                    file.write(bdata)
+                    file.close()
                     
                 finally:
                     hresult = SCardDisconnect(hcard, SCARD_UNPOWER_CARD)
@@ -235,9 +238,9 @@ def camera(request):
 
 def success(request):
     
-#    context = {
-#       'persons': persons
-#    }
+   #context = {
+     #  'persons': persons
+    #}
     return render(request, 'face_verification/success.html', context)
 
 
@@ -299,6 +302,7 @@ def face_verification(request):
 
                     # If a match was found in known_face_encodings, just use the first one.
                     data = [0,0,0]
+
                     if True in matches:
                         first_match_index = matches.index(True)
                         name = known_face_names[first_match_index]
@@ -309,7 +313,7 @@ def face_verification(request):
                         for x in fl:    
                             data[cnt] = x
                             cnt += 1
-                        print(data[0])
+                       
                         persons = [{
                             'name': data[1],
                             'surname': data[0]
@@ -317,7 +321,8 @@ def face_verification(request):
                         context = {'persons': persons}
                         user = User(name = data[1],surname = data[0], idNumber = data[2], result = True)
                         user.save()
-                        return render(request, 'face_verification/success.html', context)
+                        if allowedUsers.objects.filter(idNumber=data[2]):
+                            return render(request, 'face_verification/success.html', context)
                     elif True not in matches:
                         user = User(name = data[1],surname = data[0], idNumber = data[2], result = False)
                         user.save()
@@ -355,4 +360,3 @@ def face_verification(request):
         # Release handle to the webcam
         video_capture.release()
         # cv2.destroyAllWindows()
-
